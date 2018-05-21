@@ -1,4 +1,4 @@
-package lab6;
+package lab7;
 
 /*
  * Representa um aluno de graduação, que possui todos os atributos de um aluno.

@@ -1,4 +1,4 @@
-package lab6;
+package lab7;
 
 /*
  * Representa um aluno genérico da pós graduação, que poderá possuir

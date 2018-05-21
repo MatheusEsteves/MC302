@@ -1,4 +1,4 @@
-package lab6;
+package lab7;
 
 /*
  * Representa um aluno de doutorado, que também é um tipo de aluno de pós graduação.

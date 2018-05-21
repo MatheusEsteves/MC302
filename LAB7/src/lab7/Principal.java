@@ -1,4 +1,4 @@
-package lab6;
+package lab7;
 
 /*
  * Nome: Matheus Esteves Zanoto  RA: 184256

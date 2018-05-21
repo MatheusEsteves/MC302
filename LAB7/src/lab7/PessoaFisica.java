@@ -1,4 +1,4 @@
-package lab6;
+package lab7;
 
 /*
  * Representa uma pessoa física genérica, com nome e cpf.
