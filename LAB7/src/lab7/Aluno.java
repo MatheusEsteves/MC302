@@ -73,6 +73,21 @@ public class Aluno extends PessoaFisica {
 		return false;
 	}
 
+	/*
+		Verifica se o aluno em questão está ou não matriculado na disciplina passada como parâmetro.
+		Ou seja, verifica se a disciplina passada como parâmetro está incluída na lista de
+		disciplinas do aluno.
+	*/
+	public boolean isMatriculado(Disciplina disciplina){
+		if (this.disciplinas == null){
+			return false;
+		}
+		if (disciplina == null){
+			return false;
+		}
+		return this.disciplinas.contains(disciplina);
+	}
+
 	public Curso getCurso(){
 		return (this.cursos != null && !this.cursos.isEmpty())?this.cursos.get(0):null;
 	}

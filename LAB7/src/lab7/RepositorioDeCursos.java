@@ -2,6 +2,7 @@ package lab7;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  Classe que representa um repositório onde todos os cursos instanciados no sistema são
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class RepositorioDeCursos {
 
-    private static List<Curso> cursos;
+    private static List<Curso> cursos = new ArrayList<Curso>();
 
     public static void addCurso(Curso curso){
         if (curso == null){
@@ -32,5 +33,21 @@ public class RepositorioDeCursos {
                 System.out.println("Esse curso não está no repositório para remover");
             }
         }
+    }
+
+    public static Curso buscarCurso(String nome){
+        List<Curso> cursosBuscados = RepositorioDeCursos.cursos.stream().filter(curso -> {
+            return curso.getNome() != null && curso.getNome().equals(nome);
+        }).collect(Collectors.toList());
+
+        return (cursosBuscados != null && !cursosBuscados.isEmpty())?cursosBuscados.get(0):null;
+    }
+
+    public static Curso buscarCurso(int id){
+        List<Curso> cursosBuscados = RepositorioDeCursos.cursos.stream().filter(curso -> {
+            return curso.getId() == id;
+        }).collect(Collectors.toList());
+
+        return (cursosBuscados != null && !cursosBuscados.isEmpty())?cursosBuscados.get(0):null;
     }
 }

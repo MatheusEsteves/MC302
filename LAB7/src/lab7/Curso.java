@@ -12,12 +12,19 @@ import java.util.List;
 public class Curso {
 
     private final int LIMITE_CREDITOS;
+    private final int ID;
+    /*
+      Contador para uma sequência de forma estática, que irá ser utilizado para
+      setar o id de cada curso instanciado.
+     */
+    private static int sequence = 0;
     private String nome;
     private List<Disciplina> disciplinas;
     private List<Aluno> alunos;
 
     public Curso(String nome, int limiteCreditos){
         this.setNome(nome);
+        this.ID = this.nextSequence();
         this.alunos = new ArrayList<Aluno>();
         this.disciplinas = new ArrayList<Disciplina>();
         this.LIMITE_CREDITOS = limiteCreditos;
@@ -26,6 +33,20 @@ public class Curso {
             em um repositório de cursos, o qual guarda uma lista de cursos.
          */
         RepositorioDeCursos.addCurso(this);
+    }
+
+    /*
+        Geramos, de maneira estática, um id para o curso, de forma que cada curso
+        instanciado possuirá um id diferente de qualquer outro já instanciado
+        anteriormente.
+     */
+    private int nextSequence(){
+        Curso.sequence++;
+        return Curso.sequence;
+    }
+
+    public int getId(){
+        return this.ID;
     }
 
     public void setNome(String nome){
