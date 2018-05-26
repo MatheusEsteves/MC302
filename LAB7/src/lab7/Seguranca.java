@@ -30,4 +30,11 @@ public class Seguranca extends Funcionario {
 	public String getPeriodoPlantao() {
 		return this.periodoPlantao;
 	}
+
+	@Override
+	public void imprimeDados(){
+		super.imprimeDados();
+		System.out.println("Função do funcionário : SEGURANÇA");
+		System.out.println("Período do plantão : " + this.periodoPlantao);
+	}
 }

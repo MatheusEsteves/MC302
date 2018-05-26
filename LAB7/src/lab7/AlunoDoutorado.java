@@ -13,10 +13,23 @@ public class AlunoDoutorado extends AlunoPos {
 	/*
 	 * Instanciamos um aluno de doutorado com todos os atributos de um aluno mais as
 	 * indicações que revelam se esse doutorando tem inglês comprovado e se passou
-	 * no exame de qualificação.
+	 * no exame de qualificação. Caso o aluno já possua algum orientador previamente
+	 * existente, passamos ele como parâmetro no construtor.
 	 */
 	public AlunoDoutorado(String nome, String cpf, int estado, boolean isInglesComprovado,
-			boolean isExameQualificacaoAprovado) {
+			boolean isExameQualificacaoAprovado, Professor orientador) {
+
+		super(nome, cpf, estado, orientador);
+		this.setInglesComprovado(isInglesComprovado);
+		this.setExameQualificacaoAprovado(isExameQualificacaoAprovado);
+		this.calculaAnoMaxIntegralizacao();
+	}
+
+	/*
+	 Construtor para caso o aluno NÃO possua algum orientador previamente cadastrado.
+	*/
+	public AlunoDoutorado(String nome, String cpf, int estado, boolean isInglesComprovado,
+						  boolean isExameQualificacaoAprovado) {
 
 		super(nome, cpf, estado);
 		this.setInglesComprovado(isInglesComprovado);
@@ -44,6 +57,7 @@ public class AlunoDoutorado extends AlunoPos {
 	/*
 	 * Imprime os dados principais de um aluno de doutorado.
 	 */
+	@Override
 	public void imprimeDados() {
 		System.out.println("ALUNO DE DOUTORADO");
 		super.imprimeDados();

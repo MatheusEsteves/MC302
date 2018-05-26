@@ -21,6 +21,8 @@ public class Aluno extends PessoaFisica {
 	private int estado;
 	private int anoIngresso;
 	private List<Disciplina> disciplinas;
+
+	protected List<Float> notasDisciplinas;
 	/*
 		Cada aluno só terá como ser matriculado em um curso, APENAS.
 	 */
@@ -36,6 +38,7 @@ public class Aluno extends PessoaFisica {
 		this.anoIngresso = 0;
 		this.disciplinas = new ArrayList<Disciplina>();
 		this.cursos = new ArrayList<Curso>();
+		this.notasDisciplinas = new ArrayList<Float>();
 		this.somaCreditos = 0;
 	}
 
@@ -45,6 +48,7 @@ public class Aluno extends PessoaFisica {
 		this.gerarMatricula();
 		this.somaCreditos = 0;
 		this.disciplinas = new ArrayList<Disciplina>();
+		this.notasDisciplinas = new ArrayList<Float>();
 		this.cursos = new ArrayList<Curso>();
 		/*
 		 * Geramos aleatoriamente um ano de ingresso na instituição para o aluno.
@@ -71,6 +75,33 @@ public class Aluno extends PessoaFisica {
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	  Adiciona uma nota para esse aluno, de alguma disciplina
+	 */
+	public void addNotaDisciplina(float nota){
+		if (nota < 0 || nota > 10){
+			System.out.println("Nota inválida");
+		}
+		else{
+			this.notasDisciplinas.add(new Float(nota));
+		}
+	}
+
+	/*
+	  Calcula a média das notas conforme as notas já cadastradas,
+	  para um aluno normal de graduação
+	 */
+	public float getMediaNotasDisciplinas(){
+		if (notasDisciplinas.isEmpty()){
+			return 0;
+		}
+		float soma = 0;
+		for (Float nota : notasDisciplinas){
+			soma += nota.floatValue();
+		}
+		return soma / notasDisciplinas.size();
 	}
 
 	/*
@@ -176,6 +207,7 @@ public class Aluno extends PessoaFisica {
 	/*
 	 * Imprime os dados principais do aluno.
 	 */
+	@Override
 	public void imprimeDados() {
 		super.imprimeDados();
 		String saida = "Estado : ";

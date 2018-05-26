@@ -32,4 +32,16 @@ public class Funcionario extends PessoaFisica {
 	public double getSalario() {
 		return this.salario;
 	}
+
+	@Override
+	public void imprimeDados(){
+		super.imprimeDados();
+		/*
+		 * Se o tipo da pessoa for um funcionário, exibiremos por padrão o seu salário,
+		 * indepedentemente do tipo de funcionário que estamos tratando.
+		 */
+		System.out.println("Classificação : FUNCIONÁRIO");
+		System.out.println("Salário : " + this.salario);
+
+	}
 }

@@ -25,50 +25,10 @@ public class MeuArray extends ArrayList<PessoaFisica> {
 	public void imprimirPessoas() {
 		for (PessoaFisica pessoa : this) {
 			/*
-			 * Como qualquer elemento da lista sempre será uma pessoa física,
-			 * independentemente do tipo da pessoa, sempre exibiremos o nome e o CPF como
-			 * padrão.
+			  Iremos chamar o método imprimeDados de forma dinâmica, ou seja, será um
+			  método diferente sobreposto para cada instância de PessoaFisica deste array.
 			 */
-			System.out.println("PESSOA FÍSICA : " + pessoa.getNome() + " , CPF : " + pessoa.getCpf());
-
-			if (pessoa instanceof Aluno) {
-				/*
-				 * Se o tipo da pessoa for uma aluno, então exibiremos a sua matrícula.
-				 */
-				System.out.println("Classificação : ALUNO");
-				Aluno aluno = (Aluno) pessoa;
-				System.out.println("Matrícula : " + aluno.getMatricula());
-			} else {
-				if (pessoa instanceof Funcionario) {
-					/*
-					 * Se o tipo da pessoa for um funcionário, exibiremos por padrão o seu salário,
-					 * indepedentemente do tipo de funcionário que estamos tratando.
-					 */
-					System.out.println("Classificação : FUNCIONÁRIO");
-					Funcionario funcionario = (Funcionario) pessoa;
-					System.out.println("Salário : " + funcionario.getSalario());
-
-					if (funcionario instanceof Professor) {
-						/*
-						 * Se o tipo do funcionário for um professor, exibiremos as disciplinas que
-						 * leciona.
-						 */
-						System.out.println("Função do funcionário : PROFESSOR");
-						Professor professor = (Professor) funcionario;
-						System.out.println("Disciplinas : " + Arrays.toString(professor.getDisciplinas()));
-					} else {
-						if (funcionario instanceof Seguranca) {
-							/*
-							 * Se o tipo de funcionário for um segurança. exibiremos o período do plantão
-							 * que ele trabalha.
-							 */
-							System.out.println("Função do funcionário : SEGURANÇA");
-							Seguranca seguranca = (Seguranca) funcionario;
-							System.out.println("Período do plantão : " + seguranca.getPeriodoPlantao());
-						}
-					}
-				}
-			}
+			pessoa.imprimeDados();
 			System.out.println("==========================================================================");
 		}
 	}

@@ -12,6 +12,9 @@ public class RepositorioDeCursos {
 
     private static List<Curso> cursos = new ArrayList<Curso>();
 
+    /*
+      Adiciona um curso na lista de cursos.
+     */
     public static void addCurso(Curso curso){
         if (curso == null){
             System.out.println("Curso nulo para adicionar no repositório");
@@ -24,6 +27,10 @@ public class RepositorioDeCursos {
         }
     }
 
+
+    /*
+      Remove um curso da lista de cursos.
+     */
     public static void removeCurso(Curso curso){
         if (curso == null) {
             System.out.println("Curso nulo para remover do repositório");
@@ -35,6 +42,9 @@ public class RepositorioDeCursos {
         }
     }
 
+    /*
+      Busca um curso na lista de cursos cujo nome foi passado como parâmetro.
+     */
     public static Curso buscarCurso(String nome){
         List<Curso> cursosBuscados = RepositorioDeCursos.cursos.stream().filter(curso -> {
             return curso.getNome() != null && curso.getNome().equals(nome);
@@ -43,6 +53,9 @@ public class RepositorioDeCursos {
         return (cursosBuscados != null && !cursosBuscados.isEmpty())?cursosBuscados.get(0):null;
     }
 
+    /*
+      Busca um curso na lista de cursos cujo id foi passado como parâmetro.
+     */
     public static Curso buscarCurso(int id){
         List<Curso> cursosBuscados = RepositorioDeCursos.cursos.stream().filter(curso -> {
             return curso.getId() == id;
