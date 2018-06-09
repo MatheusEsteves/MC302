@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 /*
  * Representa um segurança com nome, cpf e período de plantão.

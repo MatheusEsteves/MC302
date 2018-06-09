@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,36 @@ public class AlunoPos extends Aluno {
 	 */
 	public AlunoPos(String nome, String cpf, int estado) {
 		super(nome, cpf, estado);
+	}
+
+	/*
+	  Método que insere esse aluno numa disciplina. Alunos de pós graduação só podem
+	  ser inseridos em disciplinas de pós graduação.
+	 */
+	public boolean addDisciplina(DisciplinaPos disciplina) {
+		if (disciplina == null) {
+			return false;
+		}
+		if (super.disciplinas == null) {
+			super.disciplinas = new ArrayList<Disciplina>();
+		}
+		if (super.disciplinas.contains(disciplina)) {
+			return false;
+		}
+		if (super.disciplinas.add(disciplina)){
+			super.somaCreditos += disciplina.getCreditos();
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	  Método específico para um aluno de pós graduação, que define seu critério de aprovação.
+	 */
+	@Override
+	public boolean isAlunoAprovado(float nota) {
+		NotaPos notaPos = converterNotaDecimalParaNotaPos(nota);
+		return notaPos.getValue() >= NotaPos.C.getValue();
 	}
 
 	/*

@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 import javax.naming.ldap.Control;
 import java.util.ArrayList;

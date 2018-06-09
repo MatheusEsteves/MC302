@@ -1,9 +1,9 @@
-package lab7;
+package lab8;
 
 /*
  * Representa uma pessoa física genérica, com nome e cpf.
  */
-public class PessoaFisica {
+public abstract class PessoaFisica {
 
 	private String nome;
 	private String cpf;

@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 /*
  * Representa um aluno de mestrado, que também é um tipo de aluno de pós graduação.

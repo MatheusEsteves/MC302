@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 /*
  * Gera uma sequence para o número de matrícula, de maneira estática e 

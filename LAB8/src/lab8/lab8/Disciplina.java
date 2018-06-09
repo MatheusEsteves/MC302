@@ -1,20 +1,23 @@
-package lab7;
+package lab8;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /*
  * Classe que representa uma Disciplina na universidade, a qual contém um código identificador,
  * um nome e os alunos matriculados nessa disciplina.
  */
-public class Disciplina {
+public abstract class Disciplina {
 
 	public final int MAX_ALUNOS;
 	private static final int NOME_MIN_LEN = 4;
 
 	private final int ID;
 	private String nome;
-	private List<Aluno> alunos;
+	protected List<Aluno> alunos;
+	private List<SituacaoAprovacao> aprovacoesAlunos;
+	private List<Float> notasAlunos;
 	private int creditos;
 
 	public Disciplina(int id, String nome, int  creditos, int maxAlunos) {
@@ -23,8 +26,25 @@ public class Disciplina {
 		this.setCreditos(creditos);
 		this.MAX_ALUNOS = maxAlunos;
 		this.alunos = new ArrayList<Aluno>();
-
+		this.notasAlunos = new ArrayList<Float>();
+		this.aprovacoesAlunos = new ArrayList<SituacaoAprovacao>();
 	}
+
+	/*
+	  Método para atribuir notas para todos os alunos matriculados nessa disciplina e
+	  verificar se o aluno foi aprovado ou não, conforme a nota atribuiída e o seu
+	  critério de aprovado (definido a partir de cada instância específica da classe Aluno).
+	 */
+	public void atribuirNotas(){
+		for (Aluno aluno : alunos){
+			float nota = GeradorNota.getNota();
+			notasAlunos.add(new Float(nota));
+			SituacaoAprovacao situacaoAprovacao = (aluno.isAlunoAprovado(nota))?
+					SituacaoAprovacao.APROVADO:SituacaoAprovacao.REPROVADO;
+			aprovacoesAlunos.add(situacaoAprovacao);
+		}
+	}
+
 
 	public void setCreditos(int creditos){
 		if (creditos <= 0){
@@ -56,28 +76,6 @@ public class Disciplina {
 	}
 
 	/*
-	 * Adicionamos um novo aluno matriculado na disciplina, caso esse aluno já não
-	 * esteja matriculado nessa disciplina. Em seguida, adicionamos essa disciplina
-	 * a lista de disciplinas do aluno incluido, com o objetivo de mantermos o
-	 * relacionamento bidirecional entre as duas entidades.
-	 */
-	public boolean addAluno(Aluno aluno) {
-		if (aluno == null) {
-			return false;
-		}
-		if (this.alunos == null) {
-			this.alunos = new ArrayList<Aluno>();
-		}
-		if (this.alunos.contains(aluno)) {
-			return false;
-		}
-		if (this.alunos.size() >= this.MAX_ALUNOS){
-			return false;
-		}
-		return this.alunos.add(aluno) && aluno.addDisciplina(this);
-	}
-
-	/*
 	 * Removemos o aluno matriculado da lista de alunos dessa disciplina. Em
 	 * seguida, removemos essa disciplina da lista de disciplinas do aluno incluido,
 	 * com o objetivo de mantermos o relacionamento bidirecional entre as duas
@@ -99,13 +97,21 @@ public class Disciplina {
 		int i = 0;
 
 		if (this.alunos != null) {
-			for (Aluno aluno : this.alunos) {
+			Iterator<Aluno> iteratorAlunos = alunos.iterator();
+			Iterator<Float> iteratorNotas = notasAlunos.iterator();
+			Iterator<SituacaoAprovacao> iteratorAprovacoes = aprovacoesAlunos.iterator();
+			while (iteratorAlunos.hasNext()){
+				Aluno aluno = iteratorAlunos.next();
+				Float nota = iteratorNotas.next();
+				SituacaoAprovacao situacao = iteratorAprovacoes.next();
+
 				String cpf = aluno.getCpf();
 				if (i == 0) {
 					resp += "[" + cpf;
 				} else {
 					resp += ", " + cpf;
 				}
+				resp += "(Nota: " + nota.floatValue() + " - "  + situacao.toString()+")";
 				i++;
 			}
 		}

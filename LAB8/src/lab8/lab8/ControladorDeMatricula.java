@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -61,7 +61,15 @@ public class ControladorDeMatricula {
                 Curso curso = aluno.getCurso();
                 if (curso != null){
                     if (aluno.getSomaCreditos() + disciplina.getCreditos() <= curso.getLimiteCreditos()){
-                        disciplina.addAluno(aluno);
+                        if (disciplina instanceof DisciplinaPos) {
+                            ((DisciplinaPos)disciplina).addAluno(aluno);
+                        }
+                        else{
+                            if (disciplina instanceof DisciplinaGraduacao &&
+                                    aluno instanceof AlunoGraduacao){
+                                ((DisciplinaGraduacao)disciplina).addAluno((AlunoGraduacao)aluno);
+                            }
+                        }
                     }
                 }
             }

@@ -1,10 +1,10 @@
-package lab7;
+package lab8;
 
 /*
  * Classe que representa um funcionário na universidade, com seu nome, CPF e salário.
  * Todo funcionário também é uma pessoa física.
  */
-public class Funcionario extends PessoaFisica {
+public abstract class Funcionario extends PessoaFisica {
 
 	private double salario;
 

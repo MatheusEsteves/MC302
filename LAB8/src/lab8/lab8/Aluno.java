@@ -1,4 +1,4 @@
-package lab7;
+package lab8;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import mc302ef.GerenciadorAlunos;
  * temo um campo chamado anoLimiteIntegralizacao que é configurado
  * a partir das subclasses de Alunos.
  */
-public class Aluno extends PessoaFisica {
+public abstract class Aluno extends PessoaFisica {
 
 	public static final int ATIVO = 1;
 	public static final int INATIVO = 2;
@@ -20,14 +20,14 @@ public class Aluno extends PessoaFisica {
 	private int matricula;
 	private int estado;
 	private int anoIngresso;
-	private List<Disciplina> disciplinas;
+	protected List<Disciplina> disciplinas;
 
 	protected List<Float> notasDisciplinas;
 	/*
 		Cada aluno só terá como ser matriculado em um curso, APENAS.
 	 */
 	private List<Curso> cursos;
-	private int somaCreditos;
+	protected int somaCreditos;
 
 	protected int anoLimiteIntegralizacao;
 
@@ -57,25 +57,11 @@ public class Aluno extends PessoaFisica {
 	}
 
 	/*
-	 * Caso a disciplina ainda não esteja associada à este aluno, adicionamos ela na
-	 * lista de disciplinas.
+	  Método abstrato que poderá ser implementado pelas sub-classes de Aluno,
+	  conforme as suas especificidades. Cada tipo de aluno possui seu critério
+	  de aprovação específico, por exemplo aluno de graduação e aluno de pós graduação.
 	 */
-	public boolean addDisciplina(Disciplina disciplina) {
-		if (disciplina == null) {
-			return false;
-		}
-		if (this.disciplinas == null) {
-			this.disciplinas = new ArrayList<Disciplina>();
-		}
-		if (this.disciplinas.contains(disciplina)) {
-			return false;
-		}
-		if (this.disciplinas.add(disciplina)){
-			this.somaCreditos += disciplina.getCreditos();
-			return true;
-		}
-		return false;
-	}
+	public abstract boolean isAlunoAprovado(float nota);
 
 	/*
 	  Adiciona uma nota para esse aluno, de alguma disciplina
